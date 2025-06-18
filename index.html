@@ -3,190 +3,107 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Top Forro</title>
-<!-- Fontes modernas -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-<style>
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
 
+<title>Top Forro</title>
+
+<!-- Manifesto para ícone na tela inicial -->
+<link rel="manifest" href="manifest.json" />
+
+<!-- Ícone para iOS -->
+<link rel="apple-touch-icon" sizes="180x180" href="icon.png" />
+
+<!-- Ícone padrão para navegadores -->
+<link rel="icon" href="icon.png" sizes="192x192" type="image/png" />
+
+<!-- Fonte -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+
+<style>
+  /* Seus estilos aqui (responsivo, bonito, moderno) */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     font-family: 'Inter', sans-serif;
-    background-color: #f4f6f8;
-    color: #333;
-    line-height: 1.6;
+    background: #f4f6f8;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    font-size: 16px;
   }
-
   header {
-    background-color: #0D3B66;
-    padding: 20px;
-    text-align: center;
-    color: #fff;
+    background-color: #0D3B66; padding: 20px; text-align: center; color: #fff;
   }
+  header h1 { font-size: 2.5em; margin-bottom: 5px; }
+  header span { font-size: 1em; color: #a7bbc7; }
 
-  header h1 {
-    font-size: 2.5em;
-    margin-bottom: 5px;
-  }
-  header span {
-    font-size: 1em;
-    color: #a7bbc7;
-  }
-
-  /* Botão modo celular/desktops fixo */
   #mode-toggle {
-    position: fixed;
-    top: 80px;
-    right: 20px;
-    z-index: 999;
-    padding: 10px 15px;
-    background-color: #ff7f50;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    transition: background-color 0.3s;
+    position: fixed; top: 80px; right: 20px; z-index: 999;
+    padding: 10px 15px; background: #ff7f50; border: none; border-radius: 8px;
+    font-weight: 600; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   }
-  #mode-toggle:hover {
-    background-color: #ff6347;
-  }
+  #mode-toggle:hover { background: #ff6347; }
 
-  /* Menu de navegação estilizado */
+  .container { flex: 1; padding: 0 20px 80px; }
+
   .menu {
-    display: flex;
-    justify-content: center;
-    background-color: #1b262c;
-    padding: 10px 0;
-    position: sticky;
-    top: 0;
-    z-index: 998;
-    flex-wrap: wrap;
+    display: flex; justify-content: center; background: #1b262c; padding: 10px 0;
+    position: sticky; top: 0; z-index: 998; flex-wrap: wrap;
   }
   .menu button {
-    background-color: #3282b8;
-    border: none;
-    padding: 12px 20px;
-    margin: 5px;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+    background: #3282b8; border: none; padding: 12px 20px; margin: 5px;
+    border-radius: 8px; font-weight: 600; cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
   }
-  .menu button:hover {
-    background-color: #0f4c75;
-    transform: translateY(-2px);
-  }
+  .menu button:hover { background: #0f4c75; transform: translateY(-2px); }
 
-  /* Seções */
   .section {
-    display: none;
-    padding: 20px;
-    max-width: 900px;
-    margin: 20px auto;
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    display: none; padding: 20px; max-width: 900px; margin: 20px auto;
+    background: #fff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   }
-  .section.active {
-    display: block;
-  }
+  .section.active { display: block; }
 
-  /* Títulos das seções */
-  .section h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #0D3B66;
-    font-size: 2em;
-  }
+  h2 { text-align: center; margin-bottom: 20px; color: #0D3B66; font-size: 1.8em; }
 
-  /* Formulários */
   .form-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    display: flex; flex-direction: column; gap: 15px;
   }
 
-  label {
-    font-weight: 600;
-    margin-bottom: 5px;
-    color: #333;
+  label { font-weight: 600; margin-bottom: 5px; color: #333; }
+
+  input[type="text"], input[type="number"], select {
+    padding: 12px 15px; border-radius: 8px; border: 1px solid #ccc; font-size: 1em;
+  }
+  input[type="text"]:focus, input[type="number"]:focus, select:focus {
+    border-color: #3282b8; outline: none;
   }
 
-  input[type="text"],
-  input[type="number"],
-  select {
-    padding: 12px 15px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 1em;
-    transition: border-color 0.2s;
-  }
-
-  input[type="text"]:focus,
-  input[type="number"]:focus,
-  select:focus {
-    border-color: #3282b8;
-    outline: none;
-  }
-
-  /* Botões estilosados e flutuantes */
   .btn {
-    padding: 15px;
-    background-color: #3282b8;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    font-size: 1.1em;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    transition: background-color 0.3s, transform 0.2s;
+    padding: 15px; background: #3282b8; color: #fff; border-radius: 10px;
+    font-size: 1.1em; font-weight: 600; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: background 0.3s, transform 0.2s;
   }
-  .btn:hover {
-    background-color: #0f4c75;
-    transform: translateY(-2px);
-  }
+  .btn:hover { background: #0f4c75; transform: translateY(-2px); }
 
-  /* Resultado estilizado */
   .resultado {
-    margin-top: 25px;
-    padding: 20px;
-    background-color: #e0e0e0;
-    border-radius: 12px;
-    font-size: 1.2em;
-    font-weight: 600;
-    color: #333;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+    margin-top: 25px; padding: 20px; background: #e0e0e0; border-radius: 12px;
+    font-size: 1.2em; font-weight: 600; color: #333; box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
   }
 
-  /* Rodapé - sempre na parte de baixo, com espaçamento */
   footer {
-    margin-top: auto;
-    padding: 15px;
-    background-color: #1b262c;
-    color: #a7bbc7;
-    text-align: center;
-    font-size: 0.9em;
+    position: fixed; bottom: 0; width: 100%; padding: 10px 20px;
+    background: #1b262c; color: #a7bbc7; text-align: center; font-size: 0.9em;
   }
 
-  /* Responsividade */
+  #save-home {
+    position: fixed; bottom: 80px; right: 20px; width: 60px; height: 60px; cursor: pointer;
+    z-index: 9999; transition: transform 0.2s, box-shadow 0.2s;
+  }
+  #save-home:hover { transform: scale(1.1); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+
   @media(max-width: 768px) {
-    body {
-      font-size: 14px;
-    }
-    header h1 {
-      font-size: 2em;
-    }
-    .section h2 {
-      font-size: 1.5em;
-    }
+    body { font-size: 14px; }
+    header h1 { font-size: 2em; }
+    .section h2 { font-size: 1.5em; }
+    #save-home { width: 50px; height: 50px; }
   }
 </style>
 </head>
@@ -197,27 +114,32 @@
   <span>Criado por Cleiton Lopes e Ruille</span>
 </header>
 
+<!-- Botão modo -->
 <button id="mode-toggle">Modo: Desktop</button>
 
+<!-- Ícone "Salvar na Tela" - substitua pelo seu ícone personalizado -->
+<img id="save-home" src="download (1).png" alt="Salvar na Tela" title="Salvar na Tela" />
+
+<!-- Menu -->
 <div class="menu">
-  <button onclick="showSection('toppvc')">Top PVC</button>
+  <button onclick="showSection('toppvc')">Pesa PVC</button>
   <button onclick="showSection('controleMP')">Controle de Matéria Prima</button>
   <button onclick="showSection('controleMP2')">Controle MP (Outro)</button>
   <button onclick="showSection('puxador')">Cálculo do Puxador</button>
 </div>
 
-<!-- Seção 1: Top PVC -->
+<!-- Seções -->
 <div id="toppvc" class="section">
-  <h2>Top PVC</h2>
+  <h2>Pesa PVC</h2>
   <form id="formTopPVC" class="form-container">
     <label for="peso">Peso</label>
-    <input type="number" id="peso" name="peso" required>
+    <input type="number" id="peso" required>
 
     <label for="largura">Largura (use ponto, exemplo: 11.1)</label>
-    <input type="text" id="largura" name="largura" placeholder="Exemplo: 11.1" required>
+    <input type="text" id="largura" placeholder="Exemplo: 11.1" required>
 
     <label for="tipo">Tipo*</label>
-    <select id="tipo" name="tipo" required>
+    <select id="tipo" required>
       <option value="forro">Forro</option>
       <option value="perfil">Perfil</option>
     </select>
@@ -227,7 +149,6 @@
   <div class="resultado" id="resultadoTopPVC"></div>
 </div>
 
-<!-- Seção 2: Controle de MP - Forro -->
 <div id="controleMP" class="section">
   <h2>Controle de Matéria Prima - Forro</h2>
   <div class="form-container">
@@ -247,12 +168,10 @@
     <input type="number" id="refugo" placeholder="Ex: 2 (opcional)">
 
     <button class="btn" onclick="calcularControleMP()">Calcular</button>
-
     <div class="resultado" id="resultadoControleMP"></div>
   </div>
 </div>
 
-<!-- Seção 3: Controle de MP (Outro) -->
 <div id="controleMP2" class="section">
   <h2>Controle de Matéria Prima (Outro)</h2>
   <div class="form-container">
@@ -278,12 +197,10 @@
     <input type="number" id="refugo2" placeholder="Ex: 5">
 
     <button class="btn" onclick="calcularControleMP2()">Calcular</button>
-
     <div class="resultado" id="resultadoControleMP2"></div>
   </div>
 </div>
 
-<!-- Seção 4: Cálculo do Puxador -->
 <div id="puxador" class="section">
   <h2>Cálculo do Puxador</h2>
   <div class="form-container">
@@ -297,7 +214,6 @@
     <input type="number" id="pesoDesejado" placeholder="Digite o peso desejado" />
 
     <button class="btn" onclick="calcularPuxador()">Calcular</button>
-
     <div class="resultado" id="resultadoPuxador"></div>
   </div>
 </div>
@@ -307,27 +223,25 @@
   <p>Top Forro &copy; 2025 | Criado por Cleiton Lopes e Ruille</p>
 </footer>
 
+<!-- Script -->
 <script>
-  // Função para alternar entre modos
+  // Modo mobile/desktop
   const modeBtn = document.getElementById('mode-toggle');
   let isMobileMode = false;
-
   document.getElementById('mode-toggle').addEventListener('click', () => {
     isMobileMode = !isMobileMode;
     document.body.style.fontSize = isMobileMode ? '14px' : '16px';
     modeBtn.textContent = isMobileMode ? 'Modo: Desktop' : 'Modo: Celular';
-    // Você pode colocar mais ajustes aqui para modo mobile ou desktop
   });
 
+  // Mostrar seção
   function showSection(id) {
     document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
     document.getElementById(id).classList.add('active');
   }
-
-  // Inicia com a primeira seção
   showSection('toppvc');
 
-  // --- Código do Top PVC ---
+  // --- Código do Pesa PVC ---
   document.getElementById('formTopPVC').addEventListener('submit', function(e) {
     e.preventDefault();
     const peso = parseFloat(document.getElementById('peso').value);
@@ -388,11 +302,10 @@
     } else {
       resultadoTexto += `<span style="color: green;">Resultado: ${diferenca.toFixed(2)} kg APROVADO</span>`;
     }
-
     resultadoDiv.innerHTML = resultadoTexto;
   }
 
-  // --- Código para Controle de MP (Outro) ---
+  // --- Controle MP Outro ---
   function calcularControleMP2() {
     const perfil = document.getElementById("perfil").value;
     const pacotes = parseFloat(document.getElementById("pacotes2").value) || 0;
@@ -400,81 +313,52 @@
     const refugo = parseFloat(document.getElementById("refugo2").value) || 0;
     const resultadoDiv = document.getElementById('resultadoControleMP2');
 
-    let multiplicador1 = 0;
-    let multiplicador2 = 0;
-
+    let m1=0, m2=0;
     switch (perfil) {
-      case "Pu":
-        multiplicador1 = 36;
-        multiplicador2 = 0.5;
-        break;
-      case "Ph":
-        multiplicador1 = 18;
-        multiplicador2 = 1.09;
-        break;
-      case "Pc":
-        multiplicador1 = 18;
-        multiplicador2 = 1.015;
-        break;
-      case "Pf":
-        multiplicador1 = 18;
-        multiplicador2 = 0.64;
-        break;
-      case "Pu color":
-        multiplicador1 = 8;
-        multiplicador2 = 0.5;
-        break;
-      case "Ph color":
-        multiplicador1 = 8;
-        multiplicador2 = 1.09;
-        break;
-      case "Pc color":
-        multiplicador1 = 8;
-        multiplicador2 = 1.015;
-        break;
-      case "Pf color":
-        multiplicador1 = 8;
-        multiplicador2 = 0.64;
-        break;
+      case "Pu": m1=36; m2=0.5; break;
+      case "Ph": m1=18; m2=1.09; break;
+      case "Pc": m1=18; m2=1.015; break;
+      case "Pf": m1=18; m2=0.64; break;
+      case "Pu color": m1=8; m2=0.5; break;
+      case "Ph color": m1=8; m2=1.09; break;
+      case "Pc color": m1=8; m2=1.015; break;
+      case "Pf color": m1=8; m2=0.64; break;
     }
-
-    const teorico = pacotes * multiplicador1 * multiplicador2;
-    const totalTeoricoComRefugo = teorico + refugo;
-    const diferenca = usado - totalTeoricoComRefugo;
-
-    let resultado = `
+    const teorico = pacotes * m1 * m2;
+    const total = teorico + refugo;
+    const diff = usado - total;
+    let res = `
       Tipo de Perfil: ${perfil}<br>
-      Teórico (pacotes × ${multiplicador1} × ${multiplicador2}): ${teorico.toFixed(2)} kg<br>
+      Teórico (pacotes × ${m1} × ${m2}): ${teorico.toFixed(2)} kg<br>
       Refugo: ${refugo.toFixed(2)} kg<br>
-      Total com Refugo: ${totalTeoricoComRefugo.toFixed(2)} kg<br>
+      Total com Refugo: ${total.toFixed(2)} kg<br>
       Usado: ${usado.toFixed(2)} kg<br>
-      Diferença (Usado - Total): ${diferenca.toFixed(2)} kg<br><br>
+      Diferença: ${diff.toFixed(2)} kg<br><br>
     `;
-
-    if (diferenca > 0) {
-      resultado += `<span style="color: red;">Resultado: ${diferenca.toFixed(2)} kg EM FALTA</span>`;
-    } else {
-      resultado += `<span style="color: green;">Resultado: ${diferenca.toFixed(2)} kg APROVADO</span>`;
-    }
-
-    resultadoDiv.innerHTML = resultado;
+    res += diff > 0 ? `<span style="color:red;">EM FALTA</span>` : `<span style="color:green;">APROVADO</span>`;
+    resultadoDiv.innerHTML = res;
   }
 
-  // --- Código do cálculo do Puxador ---
+  // --- Cálculo do Puxador ---
   function calcularPuxador() {
     const peso = parseFloat(document.getElementById('pesoPuxador').value);
     const velocidade = parseFloat(document.getElementById('velocidade').value);
     const pesoDesejado = parseFloat(document.getElementById('pesoDesejado').value);
     const resultadoDiv = document.getElementById('resultadoPuxador');
 
-    if (isNaN(peso) || isNaN(velocidade) || isNaN(pesoDesejado) || peso === 0 || pesoDesejado === 0) {
-      resultadoDiv.innerText = 'Por favor, preencha todos os campos corretamente.';
+    if (isNaN(peso) || isNaN(velocidade) || isNaN(pesoDesejado) || peso===0 || pesoDesejado===0) {
+      resultadoDiv.innerText = 'Preencha todos os campos corretamente.';
       return;
     }
 
     const resultado = (peso * velocidade) / pesoDesejado;
     resultadoDiv.innerText = `Resultado: ${resultado.toFixed(2)}`;
   }
+
+  // --- Ação do botão "Adicionar à Tela" (Instrução) ---
+  document.getElementById('save-home').addEventListener('click', () => {
+    alert('Para adicionar a página à tela do seu celular, use o menu do navegador e escolha "Adicionar à Tela de Início".');
+  });
 </script>
 
 </body>
