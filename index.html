@@ -1,0 +1,481 @@
+
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Top Forro</title>
+<!-- Fontes modernas -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f4f6f8;
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  header {
+    background-color: #0D3B66;
+    padding: 20px;
+    text-align: center;
+    color: #fff;
+  }
+
+  header h1 {
+    font-size: 2.5em;
+    margin-bottom: 5px;
+  }
+  header span {
+    font-size: 1em;
+    color: #a7bbc7;
+  }
+
+  /* Botão modo celular/desktops fixo */
+  #mode-toggle {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 999;
+    padding: 10px 15px;
+    background-color: #ff7f50;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: background-color 0.3s;
+  }
+  #mode-toggle:hover {
+    background-color: #ff6347;
+  }
+
+  /* Menu de navegação estilizado */
+  .menu {
+    display: flex;
+    justify-content: center;
+    background-color: #1b262c;
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 998;
+    flex-wrap: wrap;
+  }
+  .menu button {
+    background-color: #3282b8;
+    border: none;
+    padding: 12px 20px;
+    margin: 5px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  .menu button:hover {
+    background-color: #0f4c75;
+    transform: translateY(-2px);
+  }
+
+  /* Seções */
+  .section {
+    display: none;
+    padding: 20px;
+    max-width: 900px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+  .section.active {
+    display: block;
+  }
+
+  /* Títulos das seções */
+  .section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #0D3B66;
+    font-size: 2em;
+  }
+
+  /* Formulários */
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #333;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  select {
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+    transition: border-color 0.2s;
+  }
+
+  input[type="text"]:focus,
+  input[type="number"]:focus,
+  select:focus {
+    border-color: #3282b8;
+    outline: none;
+  }
+
+  /* Botões estilosados e flutuantes */
+  .btn {
+    padding: 15px;
+    background-color: #3282b8;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  .btn:hover {
+    background-color: #0f4c75;
+    transform: translateY(-2px);
+  }
+
+  /* Resultado estilizado */
+  .resultado {
+    margin-top: 25px;
+    padding: 20px;
+    background-color: #e0e0e0;
+    border-radius: 12px;
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #333;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+  }
+
+  /* Rodapé - sempre na parte de baixo, com espaçamento */
+  footer {
+    margin-top: auto;
+    padding: 15px;
+    background-color: #1b262c;
+    color: #a7bbc7;
+    text-align: center;
+    font-size: 0.9em;
+  }
+
+  /* Responsividade */
+  @media(max-width: 768px) {
+    body {
+      font-size: 14px;
+    }
+    header h1 {
+      font-size: 2em;
+    }
+    .section h2 {
+      font-size: 1.5em;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Top Forro</h1>
+  <span>Criado por Cleiton Lopes e Ruille</span>
+</header>
+
+<button id="mode-toggle">Modo: Desktop</button>
+
+<div class="menu">
+  <button onclick="showSection('toppvc')">Top PVC</button>
+  <button onclick="showSection('controleMP')">Controle de Matéria Prima</button>
+  <button onclick="showSection('controleMP2')">Controle MP (Outro)</button>
+  <button onclick="showSection('puxador')">Cálculo do Puxador</button>
+</div>
+
+<!-- Seção 1: Top PVC -->
+<div id="toppvc" class="section">
+  <h2>Top PVC</h2>
+  <form id="formTopPVC" class="form-container">
+    <label for="peso">Peso</label>
+    <input type="number" id="peso" name="peso" required>
+
+    <label for="largura">Largura (use ponto, exemplo: 11.1)</label>
+    <input type="text" id="largura" name="largura" placeholder="Exemplo: 11.1" required>
+
+    <label for="tipo">Tipo*</label>
+    <select id="tipo" name="tipo" required>
+      <option value="forro">Forro</option>
+      <option value="perfil">Perfil</option>
+    </select>
+
+    <button type="submit" class="btn">Calcular</button>
+  </form>
+  <div class="resultado" id="resultadoTopPVC"></div>
+</div>
+
+<!-- Seção 2: Controle de MP - Forro -->
+<div id="controleMP" class="section">
+  <h2>Controle de Matéria Prima - Forro</h2>
+  <div class="form-container">
+    <label for="produto">Produto:</label>
+    <select id="produto">
+      <option value="forro_bco">Forro Branco</option>
+      <option value="forro_colorido">Forro Colorido</option>
+    </select>
+
+    <label for="pacotes">Quantidade de Pacotes:</label>
+    <input type="number" id="pacotes" placeholder="Ex: 10">
+
+    <label for="sacos">Matéria Prima Utilizada (sacos):</label>
+    <input type="number" id="sacos" placeholder="Ex: 5">
+
+    <label for="refugo">Refugo (kg):</label>
+    <input type="number" id="refugo" placeholder="Ex: 2 (opcional)">
+
+    <button class="btn" onclick="calcularControleMP()">Calcular</button>
+
+    <div class="resultado" id="resultadoControleMP"></div>
+  </div>
+</div>
+
+<!-- Seção 3: Controle de MP (Outro) -->
+<div id="controleMP2" class="section">
+  <h2>Controle de Matéria Prima (Outro)</h2>
+  <div class="form-container">
+    <label for="perfil">Tipo de Perfil:</label>
+    <select id="perfil">
+      <option value="Pu">Pu</option>
+      <option value="Ph">Ph</option>
+      <option value="Pc">Pc</option>
+      <option value="Pf">Pf</option>
+      <option value="Pu color">Pu color</option>
+      <option value="Ph color">Ph color</option>
+      <option value="Pc color">Pc color</option>
+      <option value="Pf color">Pf color</option>
+    </select>
+
+    <label for="pacotes2">Quantidade de Pacotes:</label>
+    <input type="number" id="pacotes2" placeholder="Ex: 10">
+
+    <label for="usado">Quantidade em kg Usado:</label>
+    <input type="number" id="usado" placeholder="Ex: 100">
+
+    <label for="refugo2">Refugo (kg):</label>
+    <input type="number" id="refugo2" placeholder="Ex: 5">
+
+    <button class="btn" onclick="calcularControleMP2()">Calcular</button>
+
+    <div class="resultado" id="resultadoControleMP2"></div>
+  </div>
+</div>
+
+<!-- Seção 4: Cálculo do Puxador -->
+<div id="puxador" class="section">
+  <h2>Cálculo do Puxador</h2>
+  <div class="form-container">
+    <label for="pesoPuxador">Peso em gramas:</label>
+    <input type="number" id="pesoPuxador" placeholder="Digite o peso em gramas" />
+
+    <label for="velocidade">Velocidade do puxador:</label>
+    <input type="number" id="velocidade" placeholder="Digite a velocidade" />
+
+    <label for="pesoDesejado">Peso desejado:</label>
+    <input type="number" id="pesoDesejado" placeholder="Digite o peso desejado" />
+
+    <button class="btn" onclick="calcularPuxador()">Calcular</button>
+
+    <div class="resultado" id="resultadoPuxador"></div>
+  </div>
+</div>
+
+<!-- Rodapé -->
+<footer>
+  <p>Top Forro &copy; 2025 | Criado por Cleiton Lopes e Ruille</p>
+</footer>
+
+<script>
+  // Função para alternar entre modos
+  const modeBtn = document.getElementById('mode-toggle');
+  let isMobileMode = false;
+
+  document.getElementById('mode-toggle').addEventListener('click', () => {
+    isMobileMode = !isMobileMode;
+    document.body.style.fontSize = isMobileMode ? '14px' : '16px';
+    modeBtn.textContent = isMobileMode ? 'Modo: Desktop' : 'Modo: Celular';
+    // Você pode colocar mais ajustes aqui para modo mobile ou desktop
+  });
+
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  // Inicia com a primeira seção
+  showSection('toppvc');
+
+  // --- Código do Top PVC ---
+  document.getElementById('formTopPVC').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const peso = parseFloat(document.getElementById('peso').value);
+    const larguraInput = document.getElementById('largura').value;
+    const tipo = document.getElementById('tipo').value;
+    const resultadoDiv = document.getElementById('resultadoTopPVC');
+
+    const largura = parseFloat(larguraInput.replace(',', '.'));
+    if (isNaN(largura)) {
+      resultadoDiv.innerText = "Por favor, insira um valor válido para a largura (use ponto).";
+      return;
+    }
+
+    let resultado;
+    if (tipo === 'forro') {
+      resultado = peso / largura;
+    } else if (tipo === 'perfil') {
+      resultado = (peso / largura) * 6;
+    }
+    resultadoDiv.innerText = `Resultado: ${resultado.toFixed(2)}`;
+  });
+
+  // --- Código para Controle de MP - Forro ---
+  function calcularControleMP() {
+    const produto = document.getElementById("produto").value;
+    const pacotes = parseFloat(document.getElementById("pacotes").value) || 0;
+    const sacos = parseFloat(document.getElementById("sacos").value) || 0;
+    const refugo = parseFloat(document.getElementById("refugo").value) || 0;
+    const resultadoDiv = document.getElementById('resultadoControleMP');
+
+    let fatorMultiplicacao1 = 0;
+    let fatorMultiplicacao2 = 0;
+
+    if (produto === "forro_bco") {
+      fatorMultiplicacao1 = 18;
+      fatorMultiplicacao2 = 1.3;
+    } else if (produto === "forro_colorido") {
+      fatorMultiplicacao1 = 12;
+      fatorMultiplicacao2 = 1.35;
+    }
+
+    const teorico = pacotes * fatorMultiplicacao1 * fatorMultiplicacao2;
+    const usado = sacos * 25;
+    const totalTeoricoComRefugo = teorico + refugo;
+    const diferenca = usado - totalTeoricoComRefugo;
+
+    let resultadoTexto = `
+      Produto: ${produto === 'forro_bco' ? 'Forro Branco' : 'Forro Colorido'}<br>
+      Teórico (pacotes × ${fatorMultiplicacao1} × ${fatorMultiplicacao2}): ${teorico.toFixed(2)} kg<br>
+      Refugo: ${refugo.toFixed(2)} kg<br>
+      Total com Refugo: ${totalTeoricoComRefugo.toFixed(2)} kg<br>
+      Matéria Prima Usada: ${usado.toFixed(2)} kg<br>
+      Diferença (Usado - Total): ${diferenca.toFixed(2)} kg<br><br>
+    `;
+
+    if (diferenca > 0) {
+      resultadoTexto += `<span style="color: red;">Resultado: ${diferenca.toFixed(2)} kg EM FALTA</span>`;
+    } else {
+      resultadoTexto += `<span style="color: green;">Resultado: ${diferenca.toFixed(2)} kg APROVADO</span>`;
+    }
+
+    resultadoDiv.innerHTML = resultadoTexto;
+  }
+
+  // --- Código para Controle de MP (Outro) ---
+  function calcularControleMP2() {
+    const perfil = document.getElementById("perfil").value;
+    const pacotes = parseFloat(document.getElementById("pacotes2").value) || 0;
+    const usado = parseFloat(document.getElementById("usado").value) || 0;
+    const refugo = parseFloat(document.getElementById("refugo2").value) || 0;
+    const resultadoDiv = document.getElementById('resultadoControleMP2');
+
+    let multiplicador1 = 0;
+    let multiplicador2 = 0;
+
+    switch (perfil) {
+      case "Pu":
+        multiplicador1 = 36;
+        multiplicador2 = 0.5;
+        break;
+      case "Ph":
+        multiplicador1 = 18;
+        multiplicador2 = 1.09;
+        break;
+      case "Pc":
+        multiplicador1 = 18;
+        multiplicador2 = 1.015;
+        break;
+      case "Pf":
+        multiplicador1 = 18;
+        multiplicador2 = 0.64;
+        break;
+      case "Pu color":
+        multiplicador1 = 8;
+        multiplicador2 = 0.5;
+        break;
+      case "Ph color":
+        multiplicador1 = 8;
+        multiplicador2 = 1.09;
+        break;
+      case "Pc color":
+        multiplicador1 = 8;
+        multiplicador2 = 1.015;
+        break;
+      case "Pf color":
+        multiplicador1 = 8;
+        multiplicador2 = 0.64;
+        break;
+    }
+
+    const teorico = pacotes * multiplicador1 * multiplicador2;
+    const totalTeoricoComRefugo = teorico + refugo;
+    const diferenca = usado - totalTeoricoComRefugo;
+
+    let resultado = `
+      Tipo de Perfil: ${perfil}<br>
+      Teórico (pacotes × ${multiplicador1} × ${multiplicador2}): ${teorico.toFixed(2)} kg<br>
+      Refugo: ${refugo.toFixed(2)} kg<br>
+      Total com Refugo: ${totalTeoricoComRefugo.toFixed(2)} kg<br>
+      Usado: ${usado.toFixed(2)} kg<br>
+      Diferença (Usado - Total): ${diferenca.toFixed(2)} kg<br><br>
+    `;
+
+    if (diferenca > 0) {
+      resultado += `<span style="color: red;">Resultado: ${diferenca.toFixed(2)} kg EM FALTA</span>`;
+    } else {
+      resultado += `<span style="color: green;">Resultado: ${diferenca.toFixed(2)} kg APROVADO</span>`;
+    }
+
+    resultadoDiv.innerHTML = resultado;
+  }
+
+  // --- Código do cálculo do Puxador ---
+  function calcularPuxador() {
+    const peso = parseFloat(document.getElementById('pesoPuxador').value);
+    const velocidade = parseFloat(document.getElementById('velocidade').value);
+    const pesoDesejado = parseFloat(document.getElementById('pesoDesejado').value);
+    const resultadoDiv = document.getElementById('resultadoPuxador');
+
+    if (isNaN(peso) || isNaN(velocidade) || isNaN(pesoDesejado) || peso === 0 || pesoDesejado === 0) {
+      resultadoDiv.innerText = 'Por favor, preencha todos os campos corretamente.';
+      return;
+    }
+
+    const resultado = (peso * velocidade) / pesoDesejado;
+    resultadoDiv.innerText = `Resultado: ${resultado.toFixed(2)}`;
+  }
+</script>
+
+</body>
+</html>
