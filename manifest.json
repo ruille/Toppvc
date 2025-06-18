@@ -1,7 +1,7 @@
 {
   "name": "Top Forro",
   "short_name": "Top Forro",
-  "start_url": "download (1).png",
+  "start_url": "index.html",
   "display": "standalone",
   "background_color": "#f4f6f8",
   "theme_color": "#0D3B66",
